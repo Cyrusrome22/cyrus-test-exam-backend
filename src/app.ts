@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import Controller from './utils/interfaces/controller.interface';
 import errorMiddleware from '@/middleware/error.middleware';
 import helmet from 'helmet';
+import swaggerDocs from '@/swagger/swagger';
 
 class App {
   public express: Express;
@@ -45,6 +46,7 @@ class App {
   public listen(): void {
     this.server = this.express.listen(this.port, () => {
       console.log(`App listening on port ${this.port}`);
+      swaggerDocs(this.express);
     });
   }
 }

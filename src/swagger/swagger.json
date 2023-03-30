@@ -1,0 +1,77 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Job Rest API Documentation"
+  },
+  "tags": [
+    {
+      "name": "Jobs",
+      "description": "API for jobs in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/api/jobs": {
+      "get": {
+        "summary": "Get all jobs",
+        "tags": ["Jobs"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "type": "string",
+            "description": "Job title string"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "description": "Items page pagination"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer",
+            "description": "Items limit pagination"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Job provided"
+          },
+          "500": {
+            "description": "Something went wrong."
+          }
+        }
+      }
+    },
+    "/api/jobs/{id}": {
+      "get": {
+        "summary": "Get a job",
+        "tags": ["Jobs"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "id of job",
+            "example": "64252a593df5aa405aca397b"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job retrieved"
+          }
+        }
+      }
+    }
+  }
+}
