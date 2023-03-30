@@ -32,14 +32,16 @@
             "name": "page",
             "required": false,
             "type": "integer",
-            "description": "Items page pagination"
+            "description": "Items page pagination",
+            "example": "1"
           },
           {
             "in": "query",
             "name": "limit",
             "required": false,
             "type": "integer",
-            "description": "Items limit pagination"
+            "description": "Items limit pagination",
+            "example": "10"
           }
         ],
         "responses": {
