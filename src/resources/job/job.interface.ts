@@ -24,6 +24,7 @@ export interface JobSearchResult {
   page: number;
   limit: number;
   total: number;
+  totalPage: number;
 }
 
 export default Job;

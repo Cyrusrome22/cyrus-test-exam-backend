@@ -37,6 +37,7 @@ class JobModel {
 
       const startIndex = (query.page - 1) * query.limit;
       let endIndex = query.page * query.limit;
+      let totalPage = Math.ceil(result.length / query.limit);
 
       if (startIndex > result.length - 1) {
         return reject('Page is out of bound');
@@ -51,6 +52,7 @@ class JobModel {
         page: query.page,
         limit: query.limit,
         total: result.length,
+        totalPage: totalPage,
       });
     });
   }
