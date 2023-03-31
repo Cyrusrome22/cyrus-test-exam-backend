@@ -18,7 +18,6 @@ class JobModel {
       if (!job) {
         return reject({ message: `Job with id: ${id} not found.` });
       }
-
       resolve(job);
     });
   }
@@ -39,16 +38,15 @@ class JobModel {
       let endIndex = query.page * query.limit;
       let totalPage = Math.ceil(result.length / query.limit);
 
-      if (startIndex > result.length - 1) {
-        return reject('Page is out of bound');
-      }
-
       if (endIndex > result.length - 1) {
         endIndex = result.length - 1;
       }
 
       resolve({
-        data: result.slice(startIndex, endIndex),
+        data:
+          result.length !== 0
+            ? result.slice(startIndex, endIndex)
+            : [],
         page: query.page,
         limit: query.limit,
         total: result.length,

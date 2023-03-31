@@ -6,7 +6,6 @@ import JobModel from '@/resources/job/job.model';
 
 class JobService {
   private job = new JobModel();
-
   public async get(id: string): Promise<Job | Error> {
     const job = await this.job.findOne(id);
     return job;

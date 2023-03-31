@@ -3,6 +3,8 @@ import Controller from '@/utils/interfaces/controller.interface';
 import JobService from '@/resources/job/job.service';
 import BadRequestException from '@/utils/exceptions/bad-request.exception';
 import { JobQuery } from './job.interface';
+import cacheMiddleware from '@/middleware/cache.middleware';
+import localCache from '@/utils/cache';
 
 class JobController implements Controller {
   public path = '/jobs';
@@ -15,7 +17,7 @@ class JobController implements Controller {
 
   private initializeRoutes(): void {
     this.router.get(`${this.path}/:id`, this.get);
-    this.router.get(`${this.path}`, this.getAll);
+    this.router.get(`${this.path}`, cacheMiddleware, this.getAll);
   }
 
   private get = async (
@@ -43,6 +45,7 @@ class JobController implements Controller {
     next: NextFunction
   ) => {
     const query: JobQuery = {
+      q: '',
       page: 1,
       limit: 10,
     };
@@ -58,6 +61,7 @@ class JobController implements Controller {
         : query['limit'];
 
       const jobs = await this.jobService.getAll(query);
+      localCache.set(JSON.stringify(req.query), jobs, 120);
       res.status(200).json(jobs);
     } catch (e: any) {
       next(new BadRequestException(e));
