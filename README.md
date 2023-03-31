@@ -28,5 +28,5 @@
 
 
 2. Unit Testing results
-   ![My Image](screenshots/govgenie-backend-2.png)
+   ![My Image](screenshots/govgenie-backend-2.PNG)
 
